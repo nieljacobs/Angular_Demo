@@ -1,0 +1,54 @@
+<div class="card">
+  <div class="card-header">
+    {{ pageTitle }}
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-2">Filter by:</div>
+      <div class="col-md-4">
+        <input  type="text"
+                [formControl]="filterControl"/>
+      </div>
+    </div>
+    <div class="row"
+         *ngIf="listFilter">
+      <div class="col-md-6">
+        <h5>Filtered by: {{ listFilter }}</h5>
+      </div>
+    </div>
+    <div class="table-responsive">
+      <table class="table mb-0"
+             *ngIf="adverts && adverts.length">
+        <tbody>
+          <tr *ngFor="let advert of filteredAdverts.reverse()">
+            <td>
+              <app-advert-detail [advert]="advert"></app-advert-detail>
+            </td>
+            <td>
+              <div *ngIf="!isUserList">
+                <button class="btn btn-outline-dark btn-block"
+                        [routerLink]="['/checkout', advert.id]">
+                  Buy
+                </button>
+              </div>
+              <div *ngIf="isUserList">
+                <button class="btn btn-outline-primary btn-block"
+                        [routerLink]="['/advert', advert.id, 'edit']">
+                  Edit
+                </button>
+                <button class="btn btn-outline-danger btn-block"
+                        (click)="onDelete(advert.id)">
+                  Delete
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div *ngIf="errorMessage"
+     class="alert alert-danger">
+  Error: {{ errorMessage }}
+</div>

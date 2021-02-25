@@ -1,0 +1,69 @@
+<nav class='navbar navbar-expand navbar-light bg-light'>
+  <a class='navbar-brand'>{{pageTitle}}</a>
+  <ul class='navbar-nav mr-auto'>
+    <li class='nav-item'>
+      <a  class='nav-link' 
+          routerLinkActive='active'
+          [routerLink]="['/welcome']">
+        Home
+      </a>
+    </li>
+    <li class='nav-item'>
+      <a  class='nav-link' 
+          routerLinkActive='active'
+          [routerLink]="['/user-registration']">
+        Sign up
+      </a>
+    </li>
+    <li class='nav-item'>
+      <a  class='nav-link' 
+          routerLinkActive='active' 
+          [routerLink]="['/user-login']">
+        Sign in
+      </a>
+    </li>
+    <li class='nav-item'>
+      <a  class='nav-link pick-or-post {color: darkgoldenrod}' 
+          routerLinkActive='active'
+          [routerLink]="['/advert-list', 'all-adverts']">
+        Pick
+      </a>
+    </li>
+  </ul>
+  <ul class='navbar-nav ml-auto'>
+    <li class='nav-item'>
+      <a  class='navbar-brand'
+          *ngIf="currentUser">
+        {{ 'Welcome ' + currentUser.username + '!' }}
+      </a>
+    </li>
+    <li class='nav-item'>
+      <button type="button" 
+              class="btn btn-primary navbar-btn"
+              (click)="signOut()"
+              [routerLink]="['/welcome']"
+              *ngIf="currentUser">
+        Sign out
+      </button>
+    </li>
+    <li class='nav-item'>
+      <a  class='nav-link' 
+          routerLinkActive='active' 
+          [routerLink]="['/advert-list', 'my-adverts']"
+          *ngIf="currentUser">
+        My adverts
+      </a>
+    </li>
+    <li class='nav-item'>
+      <a  class='nav-link pick-or-post' 
+          routerLinkActive='active' 
+          [routerLink]="['/advert/0/edit']"
+          *ngIf="currentUser">
+        Post
+      </a>
+    </li>
+  </ul>
+</nav>
+<div class='container'>
+  <router-outlet></router-outlet>
+</div>

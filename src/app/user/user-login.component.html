@@ -1,0 +1,71 @@
+<div class="card">
+    <div class="card-header">
+      {{ pageTitle }}
+    </div>
+    <div class="card-body">
+        <form   novalidate 
+                (ngSubmit)="onSubmit()" 
+                [formGroup]="loginForm">
+            <!--email input-->
+            <div class="form-group row mb-2">
+                <label  class="col-md-2 col-form-label" 
+                        for="usernameId">Username:
+                </label>
+                <div class="col-md-4">
+                    <input  class="form-control"
+                            id="usernameId"
+                            type="text"
+                            placeholder="Please enter your username"
+                            formControlName="username"
+                            [ngClass]="{'is-invalid': displayMessage.username }" />
+                    <span class="invalid-feedback">
+                        {{ displayMessage.username }}
+                    </span>
+                </div>
+            </div>
+            <!--password input-->
+            <div class="form-group row mb-2">
+                <label  class="col-md-2 col-form-label" 
+                        for="passwordId">Password:
+                </label>
+                <div class="col-md-4">
+                    <input  class="form-control"
+                            id="passwordId"
+                            [type]="passwordInputType"
+                            placeholder="Please enter your password"
+                            formControlName="password"
+                            [ngClass]="{'is-invalid': displayMessage.password }" />
+                    <span class="invalid-feedback">
+                        {{ displayMessage.password }}
+                    </span>
+                </div>
+                <div class="col-md-2">
+                    <button class="btn btn-outline-secondary mr-3"
+                            type="button"
+                            title="Show password"
+                            (click)="showPassword()">{{passwordToggleMessage}}
+                    </button>  
+                </div>
+            </div>
+            <!--submit button-->
+            <div class="form-group row mb-2">
+                <div class="offset-md-2 col-md-4">
+                    <button class="btn btn-primary mr-3"
+                            type="submit"
+                            style="width:80px"
+                            [title]="loginForm.valid ? 'Login' : 'Disabled until the form data is valid'"
+                            [disabled]="!loginForm.valid">
+                        Login
+                    </button>
+                </div>
+            </div>
+            <div class="form-group row mb-2">
+                <div  class="alert alert-danger offset-md-2 col-md-4" 
+                      role="alert" 
+                      *ngIf="authenticationAlert">
+                  {{ authenticationAlert }}
+                </div>
+            </div> 
+        </form>
+    </div>
+</div>
